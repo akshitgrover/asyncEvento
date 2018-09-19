@@ -89,3 +89,25 @@ class EventoEmitter:
     def getMaxListeners(self):
 
         return self.__maxListeners
+    
+    def listenerCount(self, eventName):
+
+        count = 0
+        
+        if(eventName in self.__onListeners):
+            count += len(self.__onListeners[eventName])
+
+        if(eventName in self.__onceListeners):
+            count += len(self.__onceListeners[eventName])
+
+        return count
+    
+    def listeners(self, eventName):
+
+        listenersList = {}
+
+        if(eventName in self.__onListeners):
+            listenersList["on"] = self.__onListeners[eventName]
+
+        if(eventName in self.__onceListeners):
+            listenersList["once"] = self.__onceListeners[eventName] 
