@@ -2,27 +2,57 @@ from _error import errorHandler, ListenerCountReached
 import methods
 
 class EventoEmitter:
-    
-    __events = []
-    __onceListeners = {}
-    __onListeners = {}
+
+    defaultMaxListeners = 11
 
     def __init__(self):
         
+        self.__synchronous = True
+        self.__maxListeners = self.defaultMaxListeners
+        self.__events = []
+        self.__onceListeners = {}
+        self.__onListeners = {}
         self.__events.append("error")
         self.__onListeners["error"] = errorHandler
+    
+    @classmethod
+    def setDefaultMaxListeners(cls, n):
+        cls.defaultMaxListeners = n
 
-    def __addListener(self, eventName, func):
+    def setMaxListener(self, n):
+        self.__maxListeners = n
 
-        self.__events.append(eventName)
+    def __addListener(self, eventName, func, once = False):
+
+        try:
+            _ = self.__events.index(eventName)
         
-        if(eventName in self.__onListeners):
-            self.__onListeners[eventName].append(func)
-        elif(len(self.__onListeners) == 11):
+        except(ValueError):
+            self.__events.append(eventName)
+
+        if(len(self.__onListeners) +  len(self.__onceListeners) >= self.__maxListeners):
             raise ListenerCountReached
+
+        if(once == False):
+            if(eventName in self.__onListeners):
+                self.__onListeners[eventName].append(func)
+            else:
+                self.__onListeners[eventName] = [func]
         else:
-            self.__onListeners[eventName].append(func)
+            if(eventName in self.__onceListeners):
+                self.__onceListeners[eventName].append(func)
+            else:
+                self.__onceListeners[eventName] = [func]
+
+    def getEvents(self):
+
+        return self.__events
 
     def on(self, eventName, func):
         
-        methods.on(self, eventName, func)    
+        self.__addListener(eventName, func)
+    
+    def once(self, eventName, func):
+
+        self.__addListener(eventName, func)
+
