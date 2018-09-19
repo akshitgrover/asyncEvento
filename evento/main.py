@@ -1,14 +1,13 @@
 from _error import errorHandler, ListenerCountReached
-import methods
 
 class EventoEmitter:
 
-    defaultMaxListeners = 11
+    __defaultMaxListeners = 11
 
     def __init__(self):
         
         self.__synchronous = True
-        self.__maxListeners = self.defaultMaxListeners
+        self.__maxListeners = self.__defaultMaxListeners
         self.__events = []
         self.__onceListeners = {}
         self.__onListeners = {}
@@ -54,5 +53,35 @@ class EventoEmitter:
     
     def once(self, eventName, func):
 
-        self.__addListener(eventName, func)
+        self.__addListener(eventName, func, True)
+    
+    def removeListener(self, eventName, func):
 
+        def checkLength(eventName):
+            
+            flag = 0
+            if(eventName not in self.__onListeners or eventName not in self.__onceListeners):
+                flag += 1
+
+            if(eventName in self.__onListeners and len(self.__onListeners[eventName]) == 0):
+                flag += 1
+                del self.__onListeners[eventName]
+            if(eventName in self.__onceListeners and len(self.__onceListeners[eventName]) == 0):
+                flag += 1
+                del self.__onceListeners[eventName]
+
+            if(flag == 2):
+                index = self.__events.index(eventName)
+                self.__events = self.__events[0:index] + self.__events[index + 1:]
+
+        if(eventName in self.__onListeners and func in self.__onListeners[eventName]):
+
+            index = self.__onListeners[eventName].index(func)
+            self.__onListeners[eventName] = self.__onListeners[eventName][0:index] + self.__onListeners[eventName][index + 1:]
+            checkLength(eventName)
+
+        if(eventName in self.__onceListeners and func in self.__onceListeners[eventName]):
+            
+            index = self.__onceListeners[eventName].index(func)
+            self.__onceListeners[eventName] = self.__onceListeners[eventName][0:index] + self.__onceListeners[eventName][index + 1:]
+            checkLength(eventName)
