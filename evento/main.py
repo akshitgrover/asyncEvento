@@ -85,3 +85,7 @@ class EventoEmitter:
             index = self.__onceListeners[eventName].index(func)
             self.__onceListeners[eventName] = self.__onceListeners[eventName][0:index] + self.__onceListeners[eventName][index + 1:]
             checkLength(eventName)
+    
+    def getMaxListeners(self):
+
+        return self.__maxListeners
