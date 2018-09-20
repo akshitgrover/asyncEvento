@@ -1,7 +1,9 @@
-from _error import errorHandler, ListenerCountReached
-from emitHandler import handlerSynchronous
+import  asyncio
 
-class EventoEmitter:
+from ._error import errorHandler, ListenerCountReached
+from .emitHandler import handlerSynchronous, handlerAsynchronous
+
+class EventoEmitter():
 
     __defaultMaxListeners = 11
 
@@ -130,3 +132,7 @@ class EventoEmitter:
 
         if(synchronous):
             handlerSynchronous(tasks, params)
+        else:
+            print("called")
+            asyncio.ensure_future(handlerAsynchronous(tasks, params))
+            
