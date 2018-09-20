@@ -2,6 +2,9 @@
 asyncEvento
 ==========
 
+.. image:: https://travis-ci.org/akshitgrover/asyncEvento.svg?branch=master
+    :target: https://travis-ci.org/akshitgrover/asyncEvento
+
 Fully asynhronous python library to listen and emit events like in nodejs
 
 Installation
