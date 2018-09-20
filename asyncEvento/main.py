@@ -49,7 +49,7 @@ class EventoEmitter():
             cls.__loop.stop()
             cls.__loop.close()
 
-    def setMaxListener(self, n):
+    def setMaxListeners(self, n):
         self.__maxListeners = n
 
     def __addListener(self, eventName, func, once = False):
@@ -148,7 +148,7 @@ class EventoEmitter():
         if(eventName in self.__onceListeners):
             listenersList["once"] = self.__onceListeners[eventName]
     
-    def emit(self, eventName, synchronous = True, *params):
+    def emit(self, eventName, asynchronous = False, *params):
 
         tasks = []
 
@@ -159,7 +159,7 @@ class EventoEmitter():
         if(eventName in self.__onListeners):
             tasks += self.__onListeners[eventName]
 
-        if(synchronous):
+        if(!asynchronous):
             handlerSynchronous(tasks, params)
         else:
             asyncio.ensure_future(handlerAsynchronous(tasks, params))
