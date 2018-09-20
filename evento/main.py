@@ -6,6 +6,7 @@ from .emitHandler import handlerSynchronous, handlerAsynchronous
 class EventoEmitter():
 
     __defaultMaxListeners = 11
+    __loop = None
 
     def __init__(self):
         
@@ -19,6 +20,18 @@ class EventoEmitter():
     @classmethod
     def setDefaultMaxListeners(cls, n):
         cls.defaultMaxListeners = n
+    
+    @classmethod
+    def listen(cls):
+        cls.__loop = asyncio.get_event_loop()
+        cls.__loop.run_forever()
+    
+    @classmethod
+    async def stop(cls):
+
+        if(cls.__loop is not None):
+            cls.__loop.stop()
+            cls.__loop.close()
 
     def setMaxListener(self, n):
         self.__maxListeners = n
