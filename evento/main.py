@@ -1,4 +1,5 @@
 from _error import errorHandler, ListenerCountReached
+from emitHandler import handlerSynchronous
 
 class EventoEmitter:
 
@@ -6,13 +7,12 @@ class EventoEmitter:
 
     def __init__(self):
         
-        self.__synchronous = True
         self.__maxListeners = self.__defaultMaxListeners
         self.__events = []
         self.__onceListeners = {}
         self.__onListeners = {}
         self.__events.append("error")
-        self.__onListeners["error"] = errorHandler
+        self.__onListeners["error"] = [errorHandler]
     
     @classmethod
     def setDefaultMaxListeners(cls, n):
@@ -29,8 +29,13 @@ class EventoEmitter:
         except(ValueError):
             self.__events.append(eventName)
 
-        if(len(self.__onListeners) +  len(self.__onceListeners) >= self.__maxListeners):
-            raise ListenerCountReached
+        count = len(self.__onListeners[eventName]) if (eventName in self.__onListeners) else 0
+        count += len(self.__onceListeners[eventName]) if (eventName in self.__onceListeners) else 0
+
+        if(count >= self.__maxListeners):
+            listenerError = ListenerCountReached(self.__maxListeners, eventName)
+            self.emit("error", listenerError)
+            return
 
         if(once == False):
             if(eventName in self.__onListeners):
@@ -110,4 +115,18 @@ class EventoEmitter:
             listenersList["on"] = self.__onListeners[eventName]
 
         if(eventName in self.__onceListeners):
-            listenersList["once"] = self.__onceListeners[eventName] 
+            listenersList["once"] = self.__onceListeners[eventName]
+    
+    def emit(self, eventName, synchronous = True, *params):
+
+        tasks = []
+
+        if(eventName in self.__onceListeners):
+            tasks += self.__onceListeners[eventName]
+            del self.__onceListeners[eventName]
+        
+        if(eventName in self.__onListeners):
+            tasks += self.__onListeners[eventName]
+
+        if(synchronous):
+            handlerSynchronous(tasks, params)
