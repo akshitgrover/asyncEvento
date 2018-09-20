@@ -1,0 +1,7 @@
+site_name: asyncEvento
+repo_url: https://github.com/akshitgrover/asyncEvento
+docs_dir: docs_mk
+
+nav:
+    - Home: index.md
+    - Docs: docs.md

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Docs - asyncEvento</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">asyncEvento</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../index.html">Home</a>
+                            </li>
+                            <li class="active">
+                                <a href="./index.html">Docs</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../index.html">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="disabled">
+                                <a rel="prev" >
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/akshitgrover/asyncEvento/edit/master/docs/docs.md"><i class="fa fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#how-to-use-asyncevento">How to Use asyncEvento</a></li>
+            <li><a href="#eventoemitter-class">EventoEmitter Class</a></li>
+            <li><a href="#class-setdefaultmaxlistenersn">&lt; class &gt;.setDefaultMaxListeners(n)</a></li>
+            <li><a href="#class-listen">&lt; class &gt;.listen()</a></li>
+            <li><a href="#instance-setmaxlistenersn">&lt; instance &gt;.setMaxListeners(n)</a></li>
+            <li><a href="#instance-getevents">&lt; instance &gt;.getEvents()</a></li>
+            <li><a href="#instance-oneventname-func">&lt; instance &gt;.on(eventName, func)</a></li>
+            <li><a href="#instance-onceeventname-func">&lt; instance &gt;.once(eventName, func)</a></li>
+            <li><a href="#instance-removelistenereventname-func">&lt; instance &gt;.removeListener(eventName, func)</a></li>
+            <li><a href="#instance-getmaxlisteners">&lt; instance &gt;.getMaxListeners()</a></li>
+            <li><a href="#instance-listenercounteventname">&lt; instance &gt;.listenerCount(eventName)</a></li>
+            <li><a href="#instance-listenerseventname">&lt; instance &gt;.listeners(eventName)</a></li>
+            <li><a href="#instance-emiteventname-asynchronous-false-params">&lt; instance &gt;.emit(eventName, asynchronous = False, *params)</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="how-to-use-asyncevento">How to Use asyncEvento</h1>
+<p>asyncEvento lib follows a singleton pattern, A base class is used to extend or create emitter instances which are are further used to add as well as listen to certain events.</p>
+<h2 id="eventoemitter-class">EventoEmitter Class</h2>
+<hr />
+<h3 id="base-emitter-class-can-be-used-both-as-extension-and-parent-class">Base emitter class, Can be used both as extension and parent class.</h3>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter() # Single entrypoint of emitter methods
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="class-setdefaultmaxlistenersn">&lt; class &gt;.setDefaultMaxListeners(n)</h2>
+<hr />
+<h3 id="ninteger">{n:"integer"} <br><br></h3>
+<h3 id="set-number-of-listeners-allowed-on-a-all-the-event-of-every-class-instance-by-default-it-is-set-to-11">Set number of listeners allowed on a all the event of every class instance, By default it is set to 11.</h3>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter1 = EventoEmitter() # Will have 11 listeners allowed for each event
+
+EventoEmitter.setMaxListeners(16) # Will set default listeners count to 16
+
+emitter2 = EventoEmitter() # Will have 16 listeners allowed for each event
+
+emitter3 = EventoEmitter() # Will have 16 listeners allowed for each event
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="class-listen">&lt; class &gt;.listen()</h2>
+<hr />
+<p>Start the event loop, You can choose no to use this method, by running your own loop instead.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong></p>
+<p>This event loop will be common for all the emitter instances created.</p>
+</blockquote>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter() # Single entrypoint of emitter methods
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="instance-setmaxlistenersn">&lt; instance &gt;.setMaxListeners(n)</h2>
+<hr />
+<h3 id="ninteger_1">{n:"integer"} <br><br></h3>
+<h3 id="this-method-is-used-to-setmaxlistener-for-a-specific-instance-of-emitter-class">This method is used to setMaxListener for a specific instance of emitter class.</h3>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter() # Single entrypoint of emitter methods
+
+emitter.setMaxListener(16)
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="instance-getevents">&lt; instance &gt;.getEvents()</h2>
+<hr />
+<p>Return an array of all the events having a listener attached.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong>
+Will include 'error' by default.</p>
+</blockquote>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter() # Single entrypoint of emitter methods
+
+print(emitter.getEvents()) # [&quot;error&quot;]
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="instance-oneventname-func">&lt; instance &gt;.on(eventName, func)</h2>
+<hr />
+<h3 id="eventnamestring-funcfunction">{eventName:"string", func:"function"} <br><br></h3>
+<h3 id="attaches-a-listener-to-an-event">Attaches a listener to an event.</h3>
+<blockquote>
+<p><strong><em>Note:</em></strong>
+Everytime an event is fired the listener attached will run.</p>
+</blockquote>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter() # Single entrypoint of emitter methods
+
+def hello():
+    print(&quot;Hello node&quot;)
+
+emitter.on(&quot;hello&quot;, hello)
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="instance-onceeventname-func">&lt; instance &gt;.once(eventName, func)</h2>
+<hr />
+<h3 id="eventnamestring-funcfunction_1">{eventName:"string", func:"function"} <br><br></h3>
+<h3 id="attaches-a-listener-to-an-event_1">Attaches a listener to an event.</h3>
+<blockquote>
+<p><strong><em>Note:</em></strong>
+This function ran only once no matter how many times an event is emitted.</p>
+</blockquote>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter() # Single entrypoint of emitter methods
+
+def hello():
+    print(&quot;Hello node&quot;)
+
+emitter.once(&quot;hello&quot;, hello)
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="instance-removelistenereventname-func">&lt; instance &gt;.removeListener(eventName, func)</h2>
+<hr />
+<h3 id="eventnamestring-funcfunction_2">{eventName:"string", func:"function"}<br><br></h3>
+<h3 id="removes-a-previosly-attached-listener">Removes a previosly attached listener.</h3>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter() # Single entrypoint of emitter methods
+
+def hello():
+    print(&quot;Hello node&quot;)
+
+emitter.on(&quot;hello&quot;, hello)
+
+emitter.removeListener(&quot;hello&quot;, hello)
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="instance-getmaxlisteners">&lt; instance &gt;.getMaxListeners()</h2>
+<hr />
+<h3 id="returns-the-number-of-listeners-allowed-for-this-instance-per-event">Returns the number of listeners allowed for this instance per event.</h3>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter()
+
+print(emitter.getMaxListeners()) # 11 (Default, see setMaxListeners)
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="instance-listenercounteventname">&lt; instance &gt;.listenerCount(eventName)</h2>
+<hr />
+<h3 id="eventnamestring">{eventName:"string"} <br><br></h3>
+<h3 id="returns-the-number-of-listeners-allowed-for-this-instance-on-a-certain-event">Returns the number of listeners allowed for this instance on a certain event.</h3>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter()
+
+def hello():
+    print(&quot;Hello node&quot;)
+
+emitter.on(&quot;hello&quot;, hello)
+
+emitter.on(&quot;hello&quot;, hello)
+
+print(emitter.listenerCount(&quot;hello&quot;)) # 2
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="instance-listenerseventname">&lt; instance &gt;.listeners(eventName)</h2>
+<hr />
+<h3 id="eventnamestring_1">{eventName:"string"} <br><br></h3>
+<h3 id="returns-underlying-functions-registers-as-listeners-on-a-particular-event">Returns underlying functions registers as listeners on a particular event.</h3>
+<p>Usage:</p>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter()
+
+def hello():
+    print(&quot;Hello node&quot;)
+
+emitter.on(&quot;hello&quot;, hello)
+
+emitter.on(&quot;hello&quot;, hello)
+
+print(emitter.listeners(&quot;hello&quot;)) # &lt;function&gt; object
+
+</code></pre>
+
+<hr />
+<p><br></p>
+<h2 id="instance-emiteventname-asynchronous-false-params">&lt; instance &gt;.emit(eventName, asynchronous = False, *params)</h2>
+<hr />
+<h3 id="eventnamestring-paramsargumentsto-be-passed-in-registered-functions-asynchronousflag-to-control-if-registered-functions-are-to-be-executed-asynchronously-or-not">{eventName:"string", params:"argumentsto be passed in registered functions", asynchronous:"flag to control if registered functions are to be executed asynchronously or not"}</h3>
+<p>Usage:</p>
+<blockquote>
+<p>Synchronous</p>
+</blockquote>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+
+emitter = EventoEmitter()
+
+def hello():
+    print(&quot;Hello node&quot;)
+
+def helloV2():
+    print(&quot;Hello world&quot;)
+
+emitter.on(&quot;hello&quot;, hello)
+emitter.on(&quot;hello&quot;, helloV2)
+emitter.once(&quot;hello&quot;, helloV2)
+
+emitter.emit(&quot;hello&quot;) 
+
+emitter.listen() # Start the event loop
+
+&quot;&quot;&quot;
+Output:
+
+Hello node
+Hello world
+Hello world
+&quot;&quot;&quot;
+
+</code></pre>
+
+<blockquote>
+<p>Asynchronous</p>
+</blockquote>
+<pre><code class="python">
+from asyncEvento import EventoEmitter
+import asyncio
+
+emitter = EventoEmitter()
+
+async def hello():
+    print(&quot;Hello node&quot;)
+
+async def helloV2():
+    await asyncio.sleep(1)
+    print(&quot;Hello world&quot;)
+
+emitter.on(&quot;hello&quot;, helloV2)
+emitter.once(&quot;hello&quot;, helloV2)
+emitter.on(&quot;hello&quot;, hello)
+
+emitter.emit(&quot;hello&quot;, True) 
+
+emitter.listen() #Start the event loop
+
+&quot;&quot;&quot;
+Output:
+
+Hello node
+Hello world
+Hello world
+&quot;&quot;&quot;
+
+</code></pre></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
