@@ -1,5 +1,5 @@
 ==========
-asynEvento
+asyncEvento
 ==========
 
 Fully asynhronous python library to listen and emit events like in nodejs
@@ -8,6 +8,7 @@ Installation
 ============
 
 ::
+
     `pip install asyncEvento`
 
 Compatibilty
@@ -19,14 +20,18 @@ py36, py37
 Usage
 =====
 
-Read docs at: .. _Docs: https://akshitgrover.github.io/asyncEvento/docs/index.html
+Read docs at: Docs_
+
+.. _Docs: https://akshitgrover.github.io/asyncEvento/docs/index.html
 
 
 Why asyncEvento
 ===============
 Handling asynchronous coroutines can be painful at times, using asyncEvento one can register a function with a certain event and later can fire the event on completion of some asynchronous tasks, which will in turn lead to execute all the functions registered to the event which was fired. 
 
-Read the Docs for more .. _info: https://akshitgrover.github.io/asyncEvento/docs/index.html
+Read the Docs for more info_
+
+.. _info: https://akshitgrover.github.io/asyncEvento/docs/index.html
 
 
 Scope
