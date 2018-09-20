@@ -15,16 +15,19 @@
 """
 
 from distutils.core import setup
+import codecs
 
 setup (
 
     name = "asyncEvento",
-    version = "0.1.0",
+    version = "0.1.7",
     author = "Akshit Grover",
     author_email = "akshit.grover2016@gmail.com",
-    description = "Fully asynhronous library to listen and emit events like in nodejs",
-    packages = ["evento"],
-    include_package_data = True,
+    description = "Fully asynhronous python library to listen and emit events like in nodejs",
+    packages = ["asyncEvento"],
+    long_description = open("Readme.rst").read(),
+    license = "LICENSE",
+    url = "https://github.com/akshitgrover/asyncEvento",
     keywords = "events asynchronous emit on once listen",
     classifiers = [
 

@@ -1,6 +1,6 @@
 # asyncEvento
 
-Fully asynhronous python library to listen and emit events like in nodejs
+Fully asynchronous python library to listen and emit events like in nodejs
 
 -------
 
