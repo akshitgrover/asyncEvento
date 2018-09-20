@@ -1,11 +1,15 @@
 class ListenerCountReached(Exception):
     
-    def string(self, event):
-        return "ListenerCountReached: Maxium Listener count for '{}' reached".format(event)
+    def __init__(self, count = 0, event = ""):
+        self.__listenerCount = count
+        self.__eventName = event
+
+    def string(self):
+        return "\nListenerCountReached: Maximum Listener count '{}' reached for event '{}'\n".format(self.__listenerCount, self.__eventName)
 
     pass
 
 
-def errorHandler(self,err):
+def errorHandler(err):
     
-    print(err.string(self.eventName))
+    print(err.string())
