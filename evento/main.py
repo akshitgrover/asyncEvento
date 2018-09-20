@@ -146,6 +146,5 @@ class EventoEmitter():
         if(synchronous):
             handlerSynchronous(tasks, params)
         else:
-            print("called")
             asyncio.ensure_future(handlerAsynchronous(tasks, params))
             
