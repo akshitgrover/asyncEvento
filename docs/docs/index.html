@@ -39,7 +39,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="..">asyncEvento</a>
+                    <a class="navbar-brand" href="../index.html">asyncEvento</a>
                 </div>
 
                 <!-- Expanded navigation -->
@@ -199,7 +199,7 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter() # Single entrypoint of emitter methods
 
-def hello():
+async def hello():
     print(&quot;Hello node&quot;)
 
 emitter.on(&quot;hello&quot;, hello)
@@ -222,7 +222,7 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter() # Single entrypoint of emitter methods
 
-def hello():
+async def hello():
     print(&quot;Hello node&quot;)
 
 emitter.once(&quot;hello&quot;, hello)
@@ -241,7 +241,7 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter() # Single entrypoint of emitter methods
 
-def hello():
+async def hello():
     print(&quot;Hello node&quot;)
 
 emitter.on(&quot;hello&quot;, hello)
@@ -277,7 +277,7 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter()
 
-def hello():
+async def hello():
     print(&quot;Hello node&quot;)
 
 emitter.on(&quot;hello&quot;, hello)
@@ -300,7 +300,7 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter()
 
-def hello():
+async def hello():
     print(&quot;Hello node&quot;)
 
 emitter.on(&quot;hello&quot;, hello)
@@ -325,10 +325,10 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter()
 
-def hello():
+async def hello():
     print(&quot;Hello node&quot;)
 
-def helloV2():
+async def helloV2():
     print(&quot;Hello world&quot;)
 
 emitter.on(&quot;hello&quot;, hello)

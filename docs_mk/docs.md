@@ -122,7 +122,7 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter() # Single entrypoint of emitter methods
 
-def hello():
+async def hello():
     print("Hello node")
 
 emitter.on("hello", hello)
@@ -148,7 +148,7 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter() # Single entrypoint of emitter methods
 
-def hello():
+async def hello():
     print("Hello node")
 
 emitter.once("hello", hello)
@@ -171,7 +171,7 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter() # Single entrypoint of emitter methods
 
-def hello():
+async def hello():
     print("Hello node")
 
 emitter.on("hello", hello)
@@ -214,7 +214,7 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter()
 
-def hello():
+async def hello():
     print("Hello node")
 
 emitter.on("hello", hello)
@@ -241,7 +241,7 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter()
 
-def hello():
+async def hello():
     print("Hello node")
 
 emitter.on("hello", hello)
@@ -268,10 +268,10 @@ from asyncEvento import EventoEmitter
 
 emitter = EventoEmitter()
 
-def hello():
+async def hello():
     print("Hello node")
 
-def helloV2():
+async def helloV2():
     print("Hello world")
 
 emitter.on("hello", hello)
