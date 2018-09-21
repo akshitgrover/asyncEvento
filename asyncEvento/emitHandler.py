@@ -16,10 +16,10 @@
 
 import asyncio
 
-def handlerSynchronous(tasks, params):
-    
+async def handlerSynchronous(tasks, params):
+
     for task in tasks:
-        task(*params)
+        await asyncio.ensure_future(task(*params))
 
 async def handlerAsynchronous(tasks, params):
 

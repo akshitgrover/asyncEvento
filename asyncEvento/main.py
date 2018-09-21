@@ -159,7 +159,7 @@ class EventoEmitter():
             tasks += self.__onListeners[eventName]
 
         if(asynchronous == False):
-            handlerSynchronous(tasks, params)
+            asyncio.ensure_future(handlerSynchronous(tasks, params))
         else:
             asyncio.ensure_future(handlerAsynchronous(tasks, params))
             
